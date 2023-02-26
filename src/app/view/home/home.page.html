@@ -27,6 +27,21 @@
             </ion-label>
           </ion-item>
 
+          <p>
+            <ion-text color="medium">Últimas consultas</ion-text>
+          </p>
+  
+          <ion-list lines="none">
+            <ion-item href="/weather/{{city.id}}" detail button *ngFor="let city of historySearch">
+              <ion-label>
+                <h2>{{ city.name }}</h2>
+                <ion-text color="primary">
+                  <small>{{ city.state }}</small>
+                </ion-text>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          
         </ion-list>
       </ion-col>
     </ion-row>

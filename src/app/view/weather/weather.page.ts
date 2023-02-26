@@ -6,6 +6,7 @@ import { Weather } from '../../domain/entities/weather.model';
 import { LoadWeatherService } from '../../domain/services/load-weather.service';
 import { SearchCityService } from '../../domain/services/search-city.service';
 import { WeatherDetailsComponent } from './components/weather-details/weather-details.component';
+import { HistorySearchCityService } from '../../domain/services/history-search-city.service';
 
 @Component({
   selector: 'app-weather',
@@ -17,6 +18,7 @@ export class WeatherPage {
   constructor(
     private readonly cityService: SearchCityService,
     private readonly weatherService: LoadWeatherService,
+    private readonly historySearchCityService: HistorySearchCityService,
     private readonly modalCtrl: ModalController,
     private readonly loadingCtrl: LoadingController,
     private readonly router: Router,
@@ -32,6 +34,7 @@ export class WeatherPage {
       this.errorMessage = null;
       const cityId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
       this.city = await this.cityService.searchById(cityId);
+      this.historySearchCityService.save(this.city);
       this.weather = await this.weatherService.loadByCity(this.city);
     } catch (error) {
       this.errorMessage = error.message
