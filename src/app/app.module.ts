@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SearchCityService } from './domain/services/search-city.service';
 import { LoadWeatherService } from './domain/services/load-weather.service';
-import { HistorySearchCityService } from './domain/services/history-search-city.service';
+import { HistoricSearchCityService } from './domain/services/historic-search-city.service';
 import { FakeWeatherRepository } from './data/fake/fake-weather-repository';
 import { LocalCityRepository } from './data/local/local-city-repository';
 import { RemoteWeatherRepository } from './data/remote/remote-weather-repository';
@@ -30,7 +30,7 @@ const createLoadWeatherService = (http: HttpClient) => {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: SearchCityService, useFactory: createSearchCityService },
     { provide: LoadWeatherService, useFactory: createLoadWeatherService, deps: [HttpClient] },
-    HistorySearchCityService
+    HistoricSearchCityService
   ],
   bootstrap: [AppComponent],
 })

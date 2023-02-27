@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { City } from '../../domain/entities/city.model';
 import { SearchCityService } from '../../domain/services/search-city.service';
-import { HistorySearchCityService } from '../../domain/services/history-search-city.service';
+import { HistoricSearchCityService } from '../../domain/services/historic-search-city.service';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +13,18 @@ export class HomePage {
 
   errorMessage = null;
   cities: City[] = [];
-  historySearch: Array<City> = [];
+  historicSearch: City[] = [];
 
   constructor(
     private readonly cityService: SearchCityService,
-    private readonly historySearchCityService: HistorySearchCityService,
+    private readonly historicSearchCityService: HistoricSearchCityService,
     private readonly router: Router
   ) {
     this.onInit();
   }
 
   async onInit() {
-    this.historySearch = await this.historySearchCityService.get();
+    this.historicSearch = await this.historicSearchCityService.get('desc');
   }
 
   async onSearch(query: string) {
